@@ -1,9 +1,8 @@
 
 
-import 'package:crafty_bay/app/providers/theme_mode.dart';
+import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/app_logo.dart';
 
@@ -30,8 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
         
         Spacer(),
 
-        ThemeToggle(),
-
         Applogo(),
 
         Spacer(),
@@ -41,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
             CircularProgressIndicator(),
             SizedBox(height: 8,),
-            Text('version 1.0.1',style: TextStyle(
+            Text('${AppLocalizations.of(context)!.version} 1.0.1',style: TextStyle(
                 fontSize: 15
             ),),
 
@@ -63,48 +60,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
 
-}
-
-
-class ThemeToggle extends StatefulWidget {
-  const ThemeToggle({super.key});
-
-  @override
-  State<ThemeToggle> createState() => _ThemeToggleState();
-}
-
-class _ThemeToggleState extends State<ThemeToggle> {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ThemeModeProvider>(
-      builder: (context,themeModeProvider,_) {
-        return DropdownButton<ThemeMode>(
-            value: context.read<ThemeModeProvider>().themeMode,
-            items: [
-
-
-          DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('light')),
-
-
-          DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('dark')),
-
-
-              DropdownMenuItem(
-                  value: ThemeMode.system,
-                  child: Text('system'))
-        ],
-
-            onChanged: (newMode){
-
-          themeModeProvider.changeThemeMode(newMode!);
-            });
-      }
-    );
-  }
 }
 
 

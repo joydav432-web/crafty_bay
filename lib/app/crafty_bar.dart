@@ -4,8 +4,12 @@ import 'package:crafty_bay/app/app_theme.dart';
 import 'package:crafty_bay/app/providers/theme_mode.dart';
 import 'package:crafty_bay/app/routes.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
+import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+
 
 class CraftyBar extends StatefulWidget {
   const CraftyBar({super.key});
@@ -45,6 +49,20 @@ class _CraftyBarState extends State<CraftyBar> {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeModeProvider.themeMode,
+
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+
+          supportedLocales: [
+            Locale('en'),
+            Locale('bn')
+          ],
+
+          locale: Locale('bn'),
 
       );
         }
