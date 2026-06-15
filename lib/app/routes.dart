@@ -1,5 +1,6 @@
 
 
+import 'package:crafty_bay/features/auth/presentation/screens/signin_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,6 +15,11 @@ class AppRoutes{
 
       case SplashScreen.name:
         widget = SplashScreen();
+        break;
+
+
+      case SigninScreen.name:
+        widget = SigninScreen();
         break;
     }
 

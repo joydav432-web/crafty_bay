@@ -18,7 +18,25 @@ class AppTheme{
       color: AppColors.themeColor
     ),
 
-    scaffoldBackgroundColor: AppColors.scaffoldBackground
+    scaffoldBackgroundColor: AppColors.scaffoldBackground,
+
+    textTheme: TextTheme(
+        headlineMedium: TextStyle(
+        fontWeight: FontWeight.w600,
+
+      ),
+
+      labelLarge: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: AppColors.titleColor
+      )
+
+    ),
+
+    inputDecorationTheme: _inputDecorationTheme,
+
+      filledButtonTheme: _filledButtonThemeData
+
   );
 
 
@@ -28,7 +46,53 @@ class AppTheme{
     brightness: Brightness.dark,
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: AppColors.themeColor
-    )
+    ),
+
+    inputDecorationTheme: _inputDecorationTheme,
+      filledButtonTheme: _filledButtonThemeData
   );
+
+  static final InputDecorationTheme _inputDecorationTheme = InputDecorationTheme(
+
+      contentPadding: EdgeInsets.only(left: 12),
+
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+            color: AppColors.themeColor,
+            width: 3
+
+        )
+      ),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: AppColors.themeColor,
+              width: 3
+          )
+      ),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: AppColors.themeColor,
+              width: 3
+          )
+      ),
+      errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: AppColors.enableBorderColor,
+              width: 3
+
+          )
+      )
+  );
+
+ static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(
+
+   style:FilledButton.styleFrom(
+       backgroundColor: AppColors.themeColor,
+       fixedSize: Size.fromWidth(double.maxFinite),
+       shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(8)
+       )
+   )
+ );
 
 }

@@ -1,7 +1,7 @@
 
-
 import 'package:crafty_bay/app/app_theme.dart';
-import 'package:crafty_bay/app/providers/theme_mode.dart';
+import 'package:crafty_bay/app/providers/lacale_provider.dart';
+import 'package:crafty_bay/app/providers/thememode_provider.dart';
 import 'package:crafty_bay/app/routes.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
@@ -22,6 +22,8 @@ class _CraftyBarState extends State<CraftyBar> {
 
 
   final ThemeModeProvider _themeModeProvider = ThemeModeProvider();
+  final LocaleModeProvider _localeModeProvider = LocaleModeProvider();
+
 
 
   @override
@@ -30,41 +32,44 @@ class _CraftyBarState extends State<CraftyBar> {
     super.initState();
 
     _themeModeProvider.setDefaultThemeMode();
+    _localeModeProvider.setDefaultLocale();
   }
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: _themeModeProvider)
+        ChangeNotifierProvider.value(value: _themeModeProvider),
+        ChangeNotifierProvider.value(value: _localeModeProvider)
       ],
-      child: Consumer<ThemeModeProvider>(
+      child: Consumer<LocaleModeProvider>(builder:
+          (context,localModeProvider,_){
+          return Consumer<ThemeModeProvider>(
 
-        builder: (context,ThemeModeProvider,_){
+            builder: (context,themeModeProvider,_){
 
-        return MaterialApp(
-        debugShowCheckedModeBanner:false,
+            return MaterialApp(
+            debugShowCheckedModeBanner:false,
 
-        initialRoute: SplashScreen.name,
-        onGenerateRoute: AppRoutes.onGenarateRoute,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeModeProvider.themeMode,
+            initialRoute: SplashScreen.name,
+            onGenerateRoute: AppRoutes.onGenarateRoute,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeModeProvider.themeMode,
 
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
 
-          supportedLocales: [
-            Locale('en'),
-            Locale('bn')
-          ],
+              supportedLocales:localModeProvider.supportedLocal,
 
-          locale: Locale('bn'),
+              locale: localModeProvider.currentLocal,
 
-      );
+          );
+            }
+          );
         }
       ),
     );

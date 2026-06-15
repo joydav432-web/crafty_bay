@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app/providers/theme_mode.dart';
+import '../../../../app/providers/thememode_provider.dart';
 import 'package:provider/provider.dart';
 
 
