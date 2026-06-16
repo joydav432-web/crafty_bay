@@ -28,7 +28,7 @@ class AppTheme{
 
       labelLarge: TextStyle(
         fontWeight: FontWeight.w400,
-        color: AppColors.titleColor
+        color: AppColors.largeColor
       )
 
     ),

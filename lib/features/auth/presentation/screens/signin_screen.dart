@@ -1,5 +1,6 @@
 import 'package:crafty_bay/app/app_colors.dart';
 import 'package:crafty_bay/app/localization_extension.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/signup_scren.dart';
 import 'package:crafty_bay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:crafty_bay/features/shered/presentation/utlis/validators.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
                 FilledButton(onPressed: _onTapSignIn,
 
-                    child: Text("Sign In")),
+                    child: Text(context.localizations.signin)),
 
 
                 SizedBox(height: 10,),
@@ -97,7 +98,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an a account?",
+                    Text(context.localizations.account,
                     style: TextStyle(
                       color: AppColors.enableBorderColor
                     ),
@@ -108,13 +109,13 @@ class _SigninScreenState extends State<SigninScreen> {
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        child: Text(" Sing Up")),
+                        child: Text(context.localizations.signup)),
                   ],
                 ),
 
 
                 TextButton(onPressed: _onForgetPass,
-                    child: Text("Forget Password"))
+                    child: Text(context.localizations.forget))
 
 
 
@@ -135,6 +136,9 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   void _onSignup(){
+
+    Navigator.pushNamed(context,
+        SignupScreen.name);
 
 
   }
