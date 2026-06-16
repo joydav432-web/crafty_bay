@@ -12,6 +12,8 @@
   "forget": "Forget-Password",
   "account": "Dont't have an account ?",
   "complete": "Complete",
-  "alreadyAccount": "Already have an account?"
+  "alreadyAccount": "Already have an account?",
+  "resend": "Resend Code",
+  "next": "Next"
 
   }
