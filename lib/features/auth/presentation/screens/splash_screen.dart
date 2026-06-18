@@ -1,6 +1,5 @@
 
-
-import 'package:crafty_bay/features/auth/presentation/screens/signin_screen.dart';
+import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void>moveToSignIn()async{
     
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context,
-        SigninScreen.name);
+    Navigator.pushReplacementNamed(context,MainNavBar.name);
 
   }
 

@@ -4,6 +4,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/signin_screen.dart
 import 'package:crafty_bay/features/auth/presentation/screens/signup_scren.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/verify_otp.dart';
+import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -32,6 +33,11 @@ class AppRoutes{
 
       case OtpVerifyScreen.name:
         widget = OtpVerifyScreen();
+        break;
+
+
+      case MainNavBar.name:
+        widget = MainNavBar();
         break;
     }
 

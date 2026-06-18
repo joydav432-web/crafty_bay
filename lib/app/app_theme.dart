@@ -33,6 +33,11 @@ class AppTheme{
 
     ),
 
+    appBarTheme: AppBarTheme(
+
+      backgroundColor: Colors.white,
+    ),
+
     inputDecorationTheme: _inputDecorationTheme,
 
       filledButtonTheme: _filledButtonThemeData
