@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../widget/home_appbar.dart';
 import '../widget/home_carousleslider.dart';
+import '../widget/home_category_section.dart';
 import '../widget/product_searchbar.dart';
+import '../widget/section_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,8 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       
       appBar: HomeAppbar(),
@@ -29,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
             HomeCarousle(),
+
+            SectionHeader(headerText: 'Category', onTapSeeAll: () {
+
+
+            },),
+
+            HomeCategorySection()
             
           ],
         ),

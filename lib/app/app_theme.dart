@@ -26,6 +26,12 @@ class AppTheme{
 
       ),
 
+      headlineSmall: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: AppColors.themeColor
+      ),
+
       labelLarge: TextStyle(
         fontWeight: FontWeight.w400,
         color: AppColors.largeColor
