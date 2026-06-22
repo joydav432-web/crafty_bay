@@ -42,6 +42,12 @@ class AppTheme{
     appBarTheme: AppBarTheme(
 
       backgroundColor: Colors.white,
+
+      titleTextStyle: TextStyle(
+        color: AppColors.headlineColor,
+        fontSize: 24,
+        fontWeight: FontWeight.w600
+      ),
     ),
 
     inputDecorationTheme: _inputDecorationTheme,

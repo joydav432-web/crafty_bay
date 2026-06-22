@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app/app_colors.dart';
+import '../../../shered/presentation/widgets/category_card.dart';
 
 class HomeCategorySection extends StatelessWidget {
   const HomeCategorySection({
@@ -15,30 +15,7 @@ class HomeCategorySection extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){
 
-            return Column(
-                children: [
-
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        color: AppColors.themeColor.withAlpha(20),
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: Icon(Icons.computer,
-                        size: 48,
-                        color: AppColors.themeColor),
-                  ),
-
-                  Text("Computer",style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.themeColor
-                  ),)
-
-
-
-                ]
-
-            );
+            return CategoryCard();
 
           },
           separatorBuilder: (_,_)=>SizedBox(width: 8,),
