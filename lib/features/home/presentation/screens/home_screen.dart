@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shered/presentation/provider/main_nav_provider.dart';
+import '../../../shered/presentation/widgets/product_card.dart';
 import '../widget/home_appbar.dart';
 import '../widget/home_carousleslider.dart';
 import '../widget/home_category_section.dart';
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: HomeAppbar(),
       
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         padding:EdgeInsets .all(16),
         child: Column(
           spacing: 12,
@@ -44,7 +46,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
             },),
 
-            HomeCategorySection()
+            HomeCategorySection(),
+            SectionHeader(headerText: "Popular", onTapSeeAll: (){}),
+
+
+
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+              ),
+            )
+
+
             
           ],
         ),
