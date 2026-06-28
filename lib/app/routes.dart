@@ -8,6 +8,8 @@ import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../features/products/presentation/screen/productlist_bycategory.dart';
+
 class AppRoutes{
 
   static Route <dynamic>? onGenarateRoute(RouteSettings settings) {
@@ -39,6 +41,14 @@ class AppRoutes{
       case MainNavBar.name:
         widget = MainNavBar();
         break;
+
+
+        case ProductListByCategory.name:
+          Map <String,dynamic> arg = settings.arguments as Map<String,dynamic>;
+          widget = ProductListByCategory(
+
+            categoryId: arg['categoryId'],
+            categoryName: arg['categoryName'],);
     }
 
     return MaterialPageRoute(builder: (context)=>widget);

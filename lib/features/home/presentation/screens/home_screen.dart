@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },),
 
             HomeCategorySection(),
+
             SectionHeader(headerText: "Popular", onTapSeeAll: (){}),
 
 
@@ -56,10 +57,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
               ),
-            )
+            ),
 
 
-            
+            SectionHeader(headerText: "Special", onTapSeeAll: (){}),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+              ),
+            ),
+
+            SectionHeader(headerText: "New", onTapSeeAll: (){}),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+              ),
+            ),
+
+
+
+
+
+
+
           ],
         ),
       ),
