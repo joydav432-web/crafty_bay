@@ -1,7 +1,5 @@
-
-
-
 import 'package:crafty_bay/app/app_colors.dart';
+import 'package:crafty_bay/features/cart/presentation/screen/cart_screen.dart';
 import 'package:crafty_bay/features/category/presentation/screen/category_screen.dart';
 import 'package:crafty_bay/features/home/presentation/screens/home_screen.dart';
 import 'package:crafty_bay/features/shered/presentation/provider/main_nav_provider.dart';
@@ -20,11 +18,10 @@ class MainNavBar extends StatefulWidget {
 class _MainNavBarState extends State<MainNavBar> {
 
   final List <Widget> _screens =[
-
-    HomeScreen(),
-    CategoryScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    const HomeScreen(),
+    const CategoryScreen(),
+    const CartScreen(),
+    const HomeScreen(),
   ];
 
   @override
@@ -42,8 +39,7 @@ class _MainNavBarState extends State<MainNavBar> {
               showSelectedLabels: true,
 
               onTap: mainNavProvider.changeIndex,
-              items: [
-
+              items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home),label: "home"),
             BottomNavigationBarItem(icon: Icon(Icons.dashboard),label: "category"),
             BottomNavigationBarItem(icon: Icon(Icons.shopping_basket_outlined),label: "cart"),
