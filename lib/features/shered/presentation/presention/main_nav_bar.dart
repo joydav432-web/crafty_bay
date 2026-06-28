@@ -1,8 +1,8 @@
 import 'package:crafty_bay/app/app_colors.dart';
-import 'package:crafty_bay/features/cart/presentation/screen/cart_screen.dart';
 import 'package:crafty_bay/features/category/presentation/screen/category_screen.dart';
 import 'package:crafty_bay/features/home/presentation/screens/home_screen.dart';
 import 'package:crafty_bay/features/shered/presentation/provider/main_nav_provider.dart';
+import 'package:crafty_bay/features/wishlist/presentation/screen/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +20,8 @@ class _MainNavBarState extends State<MainNavBar> {
   final List <Widget> _screens =[
     const HomeScreen(),
     const CategoryScreen(),
-    const CartScreen(),
     const HomeScreen(),
+    const WishListScreen()
   ];
 
   @override
