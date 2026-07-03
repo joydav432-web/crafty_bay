@@ -40,35 +40,40 @@ class _ImageCarosuleSliderState extends State<ImageCarosuleSlider> {
               },
             );
           }).toList(),
-        ),
+                 ),
 
 
-        ValueListenableBuilder(
-            valueListenable: _selectedIndex,
-            builder: (context,index,_){
+        Positioned(
+          bottom: 10,
+          left: 0,
+          right: 0,
+          child: ValueListenableBuilder(
+              valueListenable: _selectedIndex,
+              builder: (context,index,_){
 
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
 
-                  for(int i =0;i<5 ; i++)
-                    Container(
+                    for(int i =0;i<5 ; i++)
+                      Container(
 
-                      margin: EdgeInsets.all(4),
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                          color: i==index?Colors.brown:Colors.white,
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                    )
-
-
-                ],
-              );
+                        margin: EdgeInsets.all(4),
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                            color: i==index?Colors.brown:Colors.white,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                      )
 
 
-            }
+                  ],
+                );
+
+
+              }
+          ),
         )
 
 
