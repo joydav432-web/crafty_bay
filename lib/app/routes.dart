@@ -56,7 +56,9 @@ class AppRoutes{
 
 
           case ProductDetailsScreen.name:
-            widget = ProductDetailsScreen();
+
+            final String productId = settings.arguments as String;
+            widget = ProductDetailsScreen(productId: productId,);
             break;
 
     }
