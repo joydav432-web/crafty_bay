@@ -2,7 +2,9 @@ import 'package:crafty_bay/features/shered/presentation/widgets/incre_decre_butt
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
+import '../widget/color_picker.dart';
 import '../widget/image_carosule_slider.dart';
+import '../widget/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId});
@@ -101,7 +103,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     )
 
                   ],
-                )
+                ),
+
+                const SizedBox(height: 10,),
+
+                Text('Color',style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontSize: 20,
+                  color: Colors.black54
+
+                )),
+
+                ColorPicker(colors: [
+                  'Red','Yellow','White','Black'
+
+                ], onChanges: (String selectedColor) {
+
+                  print(selectedColor);
+                },),
+
+
+                const SizedBox(height: 10,),
+                Text('Size',style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontSize: 20,
+                    color: Colors.black54
+
+                )),
+
+                SizePicker(size: [
+                  'S','M','L','XL'
+                ], onChanges: (String selectedSize) {
+                  print(selectedSize);
+                }
+                ),
+
+
 
               ],
             ),
