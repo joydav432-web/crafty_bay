@@ -26,6 +26,7 @@ class _ColorPickerState extends State<ColorPicker> {
 
             setState(() {
               _selectedColor = color;
+              widget.onChanges(color);
             });
             },
           child: Container(

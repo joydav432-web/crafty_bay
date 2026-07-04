@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 
 import '../features/products/presentation/screen/product_details_screnn.dart';
 import '../features/products/presentation/screen/productlist_bycategory.dart';
+import '../features/reviews/screen/review_screen.dart';
 
 class AppRoutes{
 
@@ -60,6 +61,10 @@ class AppRoutes{
             final String productId = settings.arguments as String;
             widget = ProductDetailsScreen(productId: productId,);
             break;
+
+            case ReviewScreen.name:
+              widget = ReviewScreen();
+              break;
 
     }
 

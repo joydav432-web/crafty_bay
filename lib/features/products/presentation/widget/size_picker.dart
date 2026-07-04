@@ -26,6 +26,7 @@ class _SizePickerState extends State<SizePicker> {
 
             setState(() {
               _selectedSize = size;
+              widget.onChanges(size);
             });
           },
           child: Container(
