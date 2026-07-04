@@ -11,6 +11,7 @@ import 'package:flutter/widgets.dart';
 import '../features/products/presentation/screen/product_details_screnn.dart';
 import '../features/products/presentation/screen/productlist_bycategory.dart';
 import '../features/reviews/screen/review_screen.dart';
+import '../features/reviews/widget/create_review.dart';
 
 class AppRoutes{
 
@@ -65,6 +66,10 @@ class AppRoutes{
             case ReviewScreen.name:
               widget = ReviewScreen();
               break;
+
+              case CreateReview.name:
+                widget = CreateReview();
+                break;
 
     }
 

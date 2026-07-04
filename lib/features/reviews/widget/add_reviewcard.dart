@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/reviews/widget/create_review.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
@@ -56,7 +57,10 @@ class AddReviewCart extends StatelessWidget {
 
           SizedBox(
             width: 140,
-            child: IconButton(onPressed: (){},
+            child: IconButton(onPressed: (){
+
+              Navigator.pushNamed(context, CreateReview.name);
+            },
                 style: IconButton.styleFrom(
                   backgroundColor: AppColors.themeColor,
                   shape: RoundedRectangleBorder(
