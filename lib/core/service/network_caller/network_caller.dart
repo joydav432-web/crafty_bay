@@ -58,7 +58,7 @@ class NetworkCaller{
     try {
       final Uri uri = Uri.parse(url);
       _logRequest(url,requestBody: body,headers: headers());
-      final Response response = await post(uri,headers:headers(g),
+      final Response response = await post(uri,headers:headers(),
 
           body:jsonEncode(body));
       _logResponse(response);
