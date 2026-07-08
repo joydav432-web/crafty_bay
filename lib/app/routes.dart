@@ -31,10 +31,9 @@ class AppRoutes{
         break;
 
 
-      case SignupScreen.name:
-        widget = SignupScreen();
+      case SignUpScreen.name:
+        widget = SignUpScreen();
         break;
-
 
       case OtpVerifyScreen.name:
         widget = OtpVerifyScreen();

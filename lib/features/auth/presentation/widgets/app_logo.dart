@@ -6,7 +6,7 @@ import '../../../../app/assets_images.dart';
 
 class Applogo extends StatelessWidget {
   const Applogo({
-    super.key,
+    super.key, required int width,
   });
 
 

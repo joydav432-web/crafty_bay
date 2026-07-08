@@ -38,7 +38,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
 
                 SizedBox(height: 110,),
-                Applogo(),
+                Applogo(width: 50,),
 
                 SizedBox(height: 15,),
 
@@ -138,7 +138,7 @@ class _SigninScreenState extends State<SigninScreen> {
   void _onSignup(){
 
     Navigator.pushNamed(context,
-        SignupScreen.name);
+        SignUpScreen.name);
 
 
   }

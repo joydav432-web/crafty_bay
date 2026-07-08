@@ -1,5 +1,4 @@
-
-import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/signup_scren.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,26 +6,19 @@ import 'package:flutter/material.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
-
   const SplashScreen({super.key});
 
   static const String name = '/splash';
-
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
-  Future<void>moveToSignIn()async{
-    
+  Future<void> moveToSignIn() async {
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context,MainNavBar.name);
-
+    Navigator.pushReplacementNamed(context, SignUpScreen.name);
   }
-
 
   @override
   void initState() {
@@ -36,47 +28,31 @@ class _SplashScreenState extends State<SplashScreen> {
     moveToSignIn();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
-      children: [
-        
-        Spacer(),
+        children: [
+          Spacer(),
 
-        Applogo(),
+          Applogo(width: 50,),
 
-        Spacer(),
+          Spacer(),
 
-        Column(
-          children: [
+          Column(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 8),
+              Text(
+                '${AppLocalizations.of(context)!.version} 1.0.1',
+                style: TextStyle(fontSize: 15),
+              ),
 
-            CircularProgressIndicator(),
-            SizedBox(height: 8,),
-            Text('${AppLocalizations.of(context)!.version} 1.0.1',style: TextStyle(
-                fontSize: 15
-            ),),
-
-
-            SizedBox(height: 16,),
-
-
-
-          ],
-        )
-
-
-
-
-      ],
-
-      )
+              SizedBox(height: 16),
+            ],
+          ),
+        ],
+      ),
     );
   }
-
-
 }
-
-

@@ -1,6 +1,7 @@
 import 'package:crafty_bay/core/service/network_caller/network_caller.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../../../app/get_networkcaller.dart';
 import '../../../../app/urls.dart';
 import '../../data/models/signup_params.dart';
 
@@ -20,7 +21,7 @@ class SignUpProvider extends ChangeNotifier {
     _signUpInInProgress = true;
     notifyListeners();
 
-    final NetworkResponse response = await getNetworkCaller().postRequest(
+    final NetworkResponse response = await networkCaller.postRequest(
       Urls.signUpUrl,
       body: params.toJson(),
     );
@@ -37,5 +38,5 @@ class SignUpProvider extends ChangeNotifier {
     return isSuccess;
   }
 
-  getNetworkCaller() {}
+  netWorkCaller() {}
 }
