@@ -1,5 +1,6 @@
 import 'package:crafty_bay/core/service/network_caller/network_caller.dart';
 import 'package:crafty_bay/features/auth/data/models/signin_params.dart';
+import 'package:crafty_bay/features/auth/data/models/user_model.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../app/get_networkcaller.dart';
@@ -27,7 +28,12 @@ class SignInProvider extends ChangeNotifier {
     );
     if (response.isSuccess) {
       isSuccess = true;
+
       _errorMessage = null;
+
+
+      String token = response.body['data']['token'];
+      UserModel userModel = UserModel.fromJson(response.body['data']['user']);
     } else {
       _errorMessage = response.errorMessage;
     }
