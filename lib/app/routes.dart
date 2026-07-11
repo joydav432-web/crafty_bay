@@ -36,7 +36,8 @@ class AppRoutes{
         break;
 
       case OtpVerifyScreen.name:
-        widget = OtpVerifyScreen();
+        final  email = settings.arguments as String;
+        widget = OtpVerifyScreen(email: email,);
         break;
 
 

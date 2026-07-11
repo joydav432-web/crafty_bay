@@ -1,16 +1,21 @@
 import 'package:crafty_bay/app/app_colors.dart';
 import 'package:crafty_bay/app/localization_extension.dart';
 import 'package:crafty_bay/features/auth/presentation/provider/otptimer_provider.dart';
+import 'package:crafty_bay/features/auth/presentation/provider/verify_otp_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
+import '../../../shered/presentation/widgets/show_snackbar_message.dart';
+import '../../data/models/otp_params.dart';
 import '../widgets/app_logo.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
-  const OtpVerifyScreen({super.key});
+  const OtpVerifyScreen({super.key, required this.email});
 
   static const String name = '/otp-verify';
+
+  final String email;
 
   @override
   State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
@@ -22,6 +27,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final OtpTimerProvider _otpTimerProvider = OtpTimerProvider();
+  final VerifyOtpProvider _verifyOtpProvider = VerifyOtpProvider();
+
 
   @override
   void initState() {
@@ -34,8 +41,12 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _otpTimerProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _otpTimerProvider),
+        ChangeNotifierProvider.value(value: _verifyOtpProvider),
+
+      ],
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
@@ -80,10 +91,19 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
 
                   SizedBox(height: 40),
 
-                  FilledButton(
-                    onPressed: _onNext,
+                  Consumer<VerifyOtpProvider>(
+                    builder: (context,_,_) {
 
-                    child: Text(context.localizations.next),
+                      if(_verifyOtpProvider.verifyProgress){
+
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      return FilledButton(
+                        onPressed: _onTapVerifyOtpButton,
+
+                        child: Text(context.localizations.next),
+                      );
+                    }
                   ),
 
                   SizedBox(height: 30),
@@ -124,11 +144,49 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
     );
   }
 
-  void _onNext() {
+  void _onTapVerifyOtpButton() {
+
+    if (_formKey.currentState!.validate()) {
+
+
+    }
     //to do call sign in api
+  }
+
+  Future <void> _verifyOtp() async {
+    final bool isSuccess = await _verifyOtpProvider.verifyOtp(
+
+      VerifyOtpParams(
+        otpController.text,
+        email: '',
+      ),
+    );
+    if (isSuccess) {
+
+
+    }else{
+      showSnackBarMessage(context, _verifyOtpProvider.errorMessage!);
+
+
+    }
+
+
+
+
+
   }
 
   void _onReset() {
     _otpTimerProvider.startTimer();
   }
+
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    otpController.dispose();
+  }
 }
+
+

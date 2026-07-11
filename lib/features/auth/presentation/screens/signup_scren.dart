@@ -199,7 +199,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
     final bool isSuccess = await _signUpProvider.signUp(params);
     if (isSuccess) {
-      Navigator.pushNamed(context, OtpVerifyScreen.name);
+      Navigator.pushNamed(context, OtpVerifyScreen.name,arguments: _emailTEController.text.trim());
     } else {
       showSnackBarMessage(context, _signUpProvider.errorMessage!);
     }
