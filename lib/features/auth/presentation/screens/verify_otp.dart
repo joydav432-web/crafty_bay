@@ -147,6 +147,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   void _onTapVerifyOtpButton() {
 
     if (_formKey.currentState!.validate()) {
+      _verifyOtp();
 
 
     }
