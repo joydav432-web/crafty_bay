@@ -21,4 +21,14 @@ class UserModel {
       city: jsonData['city'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'first_name': firstName,
+      'last_name': lastName,
+      'email': email,
+      'city': city,
+    };
+  }
 }

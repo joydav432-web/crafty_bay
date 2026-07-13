@@ -1,8 +1,8 @@
-import 'package:crafty_bay/features/auth/presentation/screens/signup_scren.dart';
+import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/providers/auth_controller.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,8 +16,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> moveToSignIn() async {
+
+    if(await AuthController.isLoggedIn()){
+
+      await AuthController.loadUserData();
+    }
+
     await Future.delayed(Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context, SignUpScreen.name);
+    Navigator.pushReplacementNamed(context, MainNavBar.name);
   }
 
   @override
