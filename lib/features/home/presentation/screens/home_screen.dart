@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../shered/presentation/provider/main_nav_provider.dart';
 import '../../../shered/presentation/widgets/product_card.dart';
+import '../provider/home_sliderproviders.dart';
 import '../widget/home_appbar.dart';
 import '../widget/home_carousleslider.dart';
 import '../widget/home_category_section.dart';
@@ -36,8 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ProductSearchbar(),
 
+            Consumer<HomeSliderProviders>(
+              builder: (context,homeSliderProviders,_) {
 
-            HomeCarousle(),
+                if(homeSliderProviders.sliderInProgress){
+                  return SizedBox(
+                    height: 180,
+                    child: CircularProgressIndicator(),
+                  );
+                }else{
+
+                  return HomeCarousle(sliders: homeSliderProviders.slider);
+
+                }
+
+              }
+            ),
 
             SectionHeader(headerText: 'Category', onTapSeeAll: () {
 
