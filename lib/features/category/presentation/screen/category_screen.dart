@@ -3,8 +3,12 @@ import 'package:crafty_bay/features/shered/presentation/widgets/category_card.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/category_providers.dart';
+
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
+
+  static const String name = '/category';
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
@@ -12,41 +16,69 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<CategoryProvider>().getCategories();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
-
       canPop: false,
-      onPopInvokedWithResult: (_,_)=>_backToHome(),
-
+      onPopInvokedWithResult: (_, __) => _backToHome(),
       child: Scaffold(
-
         appBar: AppBar(
-          leading: IconButton(onPressed: (){
-            _backToHome();
-
-          },
-              icon: Icon(Icons.arrow_back_ios)),
-
-          title: Text("Category"),
+          leading: IconButton(
+            onPressed: _backToHome,
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          title: const Text('Category'),
         ),
+        body: Consumer<CategoryProvider>(
+          builder: (context, provider, child) {
+            if (provider.categoryInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
+            if (provider.errorMessage != null) {
+              return Center(
+                child: Text(provider.errorMessage!),
+              );
+            }
 
-        body: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1,
-            ),
-            itemBuilder: (context,index){
+            if (provider.categories.isEmpty) {
+              return const Center(
+                child: Text('No Category Found'),
+              );
+            }
 
-              return CategoryCard();
-      }),
+            return GridView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: provider.categories.length,
+              gridDelegate:
+              const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: .8,
+              ),
+              itemBuilder: (context, index) {
+                return CategoryCard(
+                  category: provider.categories[index],
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
 
-  void _backToHome(){
+  void _backToHome() {
     context.read<MainNavProvider>().backToHome();
   }
 }

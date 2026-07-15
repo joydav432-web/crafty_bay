@@ -18,7 +18,8 @@ class _HomeCarousleState extends State<HomeCarousle> {
     return Column(
       spacing: 12,
       children: [
-        CarouselSlider(
+
+       CarouselSlider(
           options: CarouselOptions(
             height: 180.0,
             viewportFraction: 1,
@@ -33,19 +34,33 @@ class _HomeCarousleState extends State<HomeCarousle> {
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(color: Colors.amber,
-                      borderRadius: BorderRadius.circular(12),
-                      image: DecorationImage(image: NetworkImage(slider.photoUrl),
-                        onError: (_,_)=>Icon(Icons.error),
-                        fit: BoxFit.cover
-
-                      )
-                  
-                  
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey.shade200,
                   ),
-                  alignment: Alignment.center,
-                 
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      slider.photoUrl,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Center(
+                          child: Icon(Icons.error, size: 40),
+                        );
+                      },
+                    ),
+                  ),
                 );
               },
             );

@@ -1,5 +1,6 @@
 import 'package:crafty_bay/app/app_colors.dart';
 import 'package:crafty_bay/features/category/presentation/screen/category_screen.dart';
+import 'package:crafty_bay/features/category/provider/category_providers.dart';
 import 'package:crafty_bay/features/home/presentation/provider/home_sliderproviders.dart';
 import 'package:crafty_bay/features/home/presentation/screens/home_screen.dart';
 import 'package:crafty_bay/features/shered/presentation/provider/main_nav_provider.dart';
@@ -40,7 +41,9 @@ class _MainNavBarState extends State<MainNavBar> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>_homeSliderProviders)
+        ChangeNotifierProvider(create: (context)=>_homeSliderProviders),
+        ChangeNotifierProvider(create: (context)=>CategoryProvider())
+
       ],
       child: Consumer<MainNavProvider>(
         builder: (context,mainNavProvider,_) {

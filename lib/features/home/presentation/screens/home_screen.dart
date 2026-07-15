@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/category/provider/category_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.microtask(() {
+      context.read<HomeSliderProviders>().getSlider();
+      context.read<CategoryProvider>().getCategories();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if(homeSliderProviders.sliderInProgress){
                   return SizedBox(
                     height: 180,
-                    child: CircularProgressIndicator(),
+                    child: Center(child: CircularProgressIndicator()),
                   );
                 }else{
 
@@ -61,8 +73,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
             },),
 
-            HomeCategorySection(),
+            Consumer<CategoryProvider>(
+              builder: (context, provider, child) {
+                if (provider.categoryInProgress) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
+                return HomeCategorySection(
+                  categories: provider.categories,
+                );
+              },
+            ),
             SectionHeader(headerText: "Popular", onTapSeeAll: (){}),
 
 

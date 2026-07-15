@@ -4,6 +4,7 @@ import 'package:crafty_bay/app/providers/lacale_provider.dart';
 import 'package:crafty_bay/app/providers/thememode_provider.dart';
 import 'package:crafty_bay/app/routes.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
+import 'package:crafty_bay/features/category/provider/category_providers.dart';
 import 'package:crafty_bay/features/shered/presentation/provider/main_nav_provider.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +42,9 @@ class _CraftyBarState extends State<CraftyBar> {
       providers: [
         ChangeNotifierProvider.value(value: _themeModeProvider),
         ChangeNotifierProvider.value(value: _localeModeProvider),
-        ChangeNotifierProvider(create: (_)=>MainNavProvider())
-      ],
+        ChangeNotifierProvider(create: (_)=>MainNavProvider()),
+
+    ],
       child: Consumer<LocaleModeProvider>(builder:
           (context,localModeProvider,_){
           return Consumer<ThemeModeProvider>(
