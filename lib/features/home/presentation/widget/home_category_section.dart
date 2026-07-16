@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../category/data/model/category_model.dart';
 import '../../../shered/presentation/widgets/category_card.dart';
 
 class HomeCategorySection extends StatelessWidget {
@@ -15,7 +16,11 @@ class HomeCategorySection extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){
 
-            return CategoryCard();
+            return CategoryCard(categoryModel: CategoryModel(
+              id: '',
+              title: '',
+              icon: '',)
+            );
 
           },
           separatorBuilder: (_,_)=>SizedBox(width: 8,),

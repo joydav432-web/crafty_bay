@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../cart/presentation/screen/cart_screen.dart';
+import '../../../category/presentation/screen/category_provider.dart';
 
 class MainNavBar extends StatefulWidget {
   const MainNavBar({super.key});
@@ -28,11 +29,13 @@ class _MainNavBarState extends State<MainNavBar> {
   ];
 
  final HomeSliderProviders _homeSliderProviders = HomeSliderProviders();
+ final CategoryListProvider _categoryListProvider = CategoryListProvider();
 
   @override
   void initState() {
     _homeSliderProviders.getSlider();
     super.initState();
+    _categoryListProvider.getCategoriesData();
   }
 
 
@@ -40,7 +43,9 @@ class _MainNavBarState extends State<MainNavBar> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=>_homeSliderProviders)
+        ChangeNotifierProvider(create: (context)=>_homeSliderProviders),
+        ChangeNotifierProvider(create: (context)=>_categoryListProvider)
+
       ],
       child: Consumer<MainNavProvider>(
         builder: (context,mainNavProvider,_) {
