@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../category/data/model/category_model.dart';
+import '../../../category/presentation/screen/category_provider.dart';
 import '../../../shered/presentation/widgets/category_card.dart';
 
 class HomeCategorySection extends StatelessWidget {
-  const HomeCategorySection({
-    super.key,
-  });
+  const HomeCategorySection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 110,
-      child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index){
+      child: Consumer<CategoryListProvider>(
+        builder: (context, categoryListProvider, _) {
 
-            return CategoryCard(categoryModel: CategoryModel(
-              id: '',
-              title: '',
-              icon: '',)
-            );
+          if (categoryListProvider.isInitialLoading) {
+            return SizedBox(
+                height: 110,
+                child: Center(child: CircularProgressIndicator()));
+          }
+          return ListView.separated(
+            itemCount: categoryListProvider.categoryList.length > 10
+                ? 10
+                : categoryListProvider.categoryList.length,
 
-          },
-          separatorBuilder: (_,_)=>SizedBox(width: 8,),
-          itemCount: 15),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+
+              return CategoryCard(
+                categoryModel: categoryListProvider.categoryList[index],
+              );
+            },
+            separatorBuilder: (_, _) => SizedBox(width: 8),
+          );
+        },
+      ),
     );
   }
 }
-
