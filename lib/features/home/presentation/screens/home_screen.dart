@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../shered/presentation/provider/main_nav_provider.dart';
-import '../../../shered/presentation/widgets/product_card.dart';
 import '../provider/home_sliderproviders.dart';
 import '../widget/home_appbar.dart';
 import '../widget/home_carousleslider.dart';
@@ -70,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
               ),
             ),
 
@@ -80,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+                  //children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
               ),
             ),
 
@@ -89,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
               ),
             ),
 

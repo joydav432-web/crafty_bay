@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/assets_images.dart';
+import '../../../products/data/model/product_model.dart';
 import '../../../products/presentation/screen/product_details_screnn.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key,
+    super.key, required this.productModel,
   });
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
 
-        Navigator.pushNamed(context, ProductDetailsScreen.name,arguments: 'feio');
+        Navigator.pushNamed(context, ProductDetailsScreen.name,
+            arguments: productModel.id);
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),
@@ -35,7 +39,13 @@ class ProductCard extends StatelessWidget {
                         topRight: Radius.circular(12))
                 ),
 
-                child: Image.asset(AssetsPath.shoe),
+                child: Image.network(
+                  getProductPhoto(productModel.photos),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(AssetsPath.noImage);
+                  },
+                )
 
               ),
 
@@ -46,7 +56,7 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    Text("Title of Product",
+                    Text(productModel.title,
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.black54
@@ -57,7 +67,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
 
-                        Text('\$100',
+                        Text('${productModel.price} \$',
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: AppColors.themeColor
@@ -71,7 +81,7 @@ class ProductCard extends StatelessWidget {
                               color: Colors.amber,
                             ),
 
-                            Text('4.5',
+                            Text('${productModel.rating}',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600
                               ),
@@ -108,6 +118,15 @@ class ProductCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  String getProductPhoto(List<String> photos) {
+
+    if (photos.isEmpty) {
+      return '';
+    }
+    return photos.first;
   }
 }
 
