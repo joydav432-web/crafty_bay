@@ -13,11 +13,11 @@ class HomeCategorySection extends StatelessWidget {
       height: 110,
       child: Consumer<CategoryListProvider>(
         builder: (context, categoryListProvider, _) {
-
           if (categoryListProvider.isInitialLoading) {
             return SizedBox(
-                height: 110,
-                child: Center(child: CircularProgressIndicator()));
+              height: 110,
+              child: Center(child: CircularProgressIndicator()),
+            );
           }
           return ListView.separated(
             itemCount: categoryListProvider.categoryList.length > 10
@@ -26,7 +26,6 @@ class HomeCategorySection extends StatelessWidget {
 
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-
               return CategoryCard(
                 categoryModel: categoryListProvider.categoryList[index],
               );

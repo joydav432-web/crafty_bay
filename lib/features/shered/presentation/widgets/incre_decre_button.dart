@@ -48,7 +48,8 @@ class _IncreDecreButtonState extends State<IncreDecreButton> {
           }
 
 
-        }),
+        },_counter == widget.minCount),
+
 
 
         Text(
@@ -68,7 +69,7 @@ class _IncreDecreButtonState extends State<IncreDecreButton> {
             widget.onChange(_counter);
           }
 
-        })
+        },_counter == widget.maxCount)
 
       ],
 
@@ -77,14 +78,14 @@ class _IncreDecreButtonState extends State<IncreDecreButton> {
   }
 
 
-  Widget _iconButton(IconData icon,VoidCallback onTap){
+  Widget _iconButton(IconData icon,VoidCallback onTap,bool disabled){
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: AppColors.themeColor.withAlpha(50),
+          color: disabled?Colors.grey.shade300:AppColors.themeColor.withAlpha(50),
           borderRadius: BorderRadius.circular(8)
         ),
         child: Icon(icon,

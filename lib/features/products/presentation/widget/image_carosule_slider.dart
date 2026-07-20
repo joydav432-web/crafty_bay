@@ -4,7 +4,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ImageCarosuleSlider extends StatefulWidget {
-  const ImageCarosuleSlider({super.key});
+  const ImageCarosuleSlider({super.key, required this.photos});
+
+  final List<String>photos;
 
   @override
   State<ImageCarosuleSlider> createState() => _ImageCarosuleSliderState();
@@ -26,16 +28,16 @@ class _ImageCarosuleSliderState extends State<ImageCarosuleSlider> {
 
 
               }),
-          items: [1,2,3,4,5].map((i) {
+          items: widget.photos.map((photo) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade200
+                        color: Colors.grey.shade200,
+                      image: DecorationImage(image: NetworkImage(photo),)
                     ),
-                    child: Center(child: Text('text $i', style: TextStyle(fontSize: 16.0),))
                 );
               },
             );
@@ -55,7 +57,7 @@ class _ImageCarosuleSliderState extends State<ImageCarosuleSlider> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    for(int i =0;i<5 ; i++)
+                    for(int i =0;i<widget.photos.length ; i++)
                       Container(
 
                         margin: EdgeInsets.all(4),

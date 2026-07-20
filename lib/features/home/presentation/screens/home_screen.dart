@@ -1,4 +1,5 @@
 
+import 'package:crafty_bay/features/home/presentation/widget/populer_category_section.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../shered/presentation/provider/main_nav_provider.dart';
@@ -63,14 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SectionHeader(headerText: "Popular", onTapSeeAll: (){}),
 
+            PopularCategorySection(),
 
 
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
-              ),
-            ),
+
+
 
 
             SectionHeader(headerText: "Special", onTapSeeAll: (){}),
@@ -78,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  //children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
+                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
               ),
             ),
 
