@@ -1,5 +1,6 @@
 
 import 'package:crafty_bay/features/home/presentation/widget/populer_category_section.dart';
+import 'package:crafty_bay/features/home/presentation/widget/special_category_section%20added.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../shered/presentation/provider/main_nav_provider.dart';
@@ -7,6 +8,7 @@ import '../provider/home_sliderproviders.dart';
 import '../widget/home_appbar.dart';
 import '../widget/home_carousleslider.dart';
 import '../widget/home_category_section.dart';
+import '../widget/new_category_section.dart';
 import '../widget/product_searchbar.dart';
 import '../widget/section_header.dart';
 
@@ -62,32 +64,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
             HomeCategorySection(),
 
-            SectionHeader(headerText: "Popular", onTapSeeAll: (){}),
+            SectionHeader(headerText: "Popular", onTapSeeAll: (){
+
+              context.read<MainNavProvider>().backToCategory();
+
+            }),
 
             PopularCategorySection(),
 
+            SectionHeader(headerText: "Special", onTapSeeAll: (){
+              context.read<MainNavProvider>().backToCategory();
+            }),
+
+            SpecialCategorySection(),
 
 
+            SectionHeader(headerText: "New", onTapSeeAll: (){
+              context.read<MainNavProvider>().backToCategory();
+            }),
+            NewCategorySection(),
 
 
-
-            SectionHeader(headerText: "Special", onTapSeeAll: (){}),
-
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
-              ),
-            ),
-
-            SectionHeader(headerText: "New", onTapSeeAll: (){}),
-
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                 // children: [1,2,3,4,5,6,7,8,9,10].map((e)=>ProductCard()).toList()
-              ),
-            ),
 
 
 

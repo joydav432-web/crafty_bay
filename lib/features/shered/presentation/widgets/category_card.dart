@@ -35,7 +35,9 @@ class CategoryCard extends StatelessWidget {
                   height: 48,
 
                 errorBuilder: (_,_,_){
-                return Icon(Icons.error);
+                return Icon(Icons.error,
+                  size: 48,
+                );
                 },
               ),
             ),
