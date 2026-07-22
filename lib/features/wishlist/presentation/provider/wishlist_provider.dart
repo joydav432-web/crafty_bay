@@ -1,31 +1,37 @@
-
-import 'package:crafty_bay/features/shered/data/model/product_model.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../app/get_networkcaller.dart';
-import 'package:flutter/foundation.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/service/network_caller/network_caller.dart';
+import '../../data/model/wislist_model.dart';
 
-class ProductListProvider extends ChangeNotifier {
+class WishListProvider extends ChangeNotifier {
+  final int _productsPerPage = 32;
+
   bool _isInitialLoading = false;
-  bool _isLoadMoreLoading = false;
 
-  final int productPerPage =32;
-
-  int _currentPage = 0;
-  int? _lastPage;
+  bool _isLoadingMore = false;
 
   String? _errorMessage;
-  final List<ProductModel> _productList = [];
+
+  int? _lastPage;
+
+  int _currentPage = 0;
+
+  final List<WishlistModel> _wishListItems = [];
+
   bool get isInitialLoading => _isInitialLoading;
-  bool get isLoadMoreLoading => _isLoadMoreLoading;
-  List<ProductModel> get productList => _productList;
+
+  bool get isLoadingMore => _isLoadingMore;
+
   String? get errorMessage => _errorMessage;
 
+  List<WishlistModel> get productList => _wishListItems;
 
-  Future<bool> getProductData() async {
+  Future<bool> getWishlistData() async {
     bool isSuccess = false;
 
+    // Current page is greater than last or is that initial page
     if (_currentPage == 0 || (_lastPage != null && _currentPage < _lastPage!)) {
       _currentPage++;
     } else {
@@ -35,23 +41,22 @@ class ProductListProvider extends ChangeNotifier {
     if (_currentPage == 1) {
       _isInitialLoading = true;
     } else {
-      _isLoadMoreLoading = true;
+      _isLoadingMore = true;
     }
-
     notifyListeners();
 
+    // Load data from API
     final NetworkResponse response = await networkCaller().getRequest(
-      Urls.productListUrl(_currentPage,productPerPage)
+      Urls.wishListUrl(_currentPage, _productsPerPage),
     );
-
     if (response.isSuccess) {
-      isSuccess = true;
-      List<ProductModel> list = [];
+      List<WishlistModel> list = [];
       for (Map<String, dynamic> jsonData in response.body['data']['results']) {
-        list.add(ProductModel.fromJson(jsonData));
+        list.add(WishlistModel.fromJson(jsonData));
       }
-      _productList.addAll(list);
+      _wishListItems.addAll(list);
       _lastPage = response.body['data']['last_page'];
+      isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
     }
@@ -59,22 +64,19 @@ class ProductListProvider extends ChangeNotifier {
     if (_currentPage == 1) {
       _isInitialLoading = false;
     } else {
-      _isLoadMoreLoading = false;
+      _isLoadingMore = false;
     }
-
     notifyListeners();
 
     return isSuccess;
-
   }
 
-  void refreshCategoryList() {
+  void refreshProductList() {
     _currentPage = 0;
-    _productList.clear();
     _lastPage = null;
-    getProductData();
+    _wishListItems.clear();
+    getWishlistData();
   }
 
-  bool get isLoading=>_isInitialLoading||_isLoadMoreLoading;
-
+  bool get isLoading => _isInitialLoading || _isLoadingMore;
 }

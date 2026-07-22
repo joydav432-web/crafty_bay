@@ -17,6 +17,11 @@ class Urls {
 
   static const String addToCartUrl = '$_baseUrl/cart';
 
+  static String wishListUrl(int currentPage, int productsPerPage) =>
+      '$_baseUrl/wishlist?count=$productsPerPage&page=$currentPage';
+
+
+
 
 
 }

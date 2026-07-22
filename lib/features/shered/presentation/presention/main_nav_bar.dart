@@ -25,7 +25,7 @@ class _MainNavBarState extends State<MainNavBar> {
     const HomeScreen(),
     const CategoryScreen(),
     const CartScreen(),
-    const WishListScreen()
+    const WishlistScreen()
   ];
 
  final HomeSliderProviders _homeSliderProviders = HomeSliderProviders();

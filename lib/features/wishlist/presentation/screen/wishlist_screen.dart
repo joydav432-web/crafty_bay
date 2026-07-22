@@ -1,52 +1,119 @@
-import 'package:crafty_bay/features/shered/presentation/widgets/product_card.dart';
+import 'package:crafty_bay/features/shered/presentation/provider/main_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shered/presentation/provider/main_nav_provider.dart';
+import '../../../shered/presentation/widgets/product_card.dart';
+import '../provider/wishlist_provider.dart';
 
-class WishListScreen extends StatefulWidget {
-  const WishListScreen({super.key});
+
+class WishlistScreen extends StatefulWidget {
+  const WishlistScreen({super.key});
+
+  static const String name = '/wishlist';
 
   @override
-  State<WishListScreen> createState() => _WishListScreenState();
+  State<WishlistScreen> createState() => _WishlistScreenState();
 }
 
-class _WishListScreenState extends State<WishListScreen> {
+class _WishlistScreenState extends State<WishlistScreen> {
+  final WishListProvider _wishListProvider = WishListProvider();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _wishListProvider.getWishlistData();
+    _scrollController.addListener(_loadMore);
+  }
+
+  void _loadMore() {
+    if ((_wishListProvider.isLoading == false) &&
+        _scrollController.position.extentAfter < 300) {
+      _wishListProvider.getWishlistData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (_,_)=>_backToHome(),
-
-      child: Scaffold(
-        appBar: AppBar(
-
-
-          title: const Text('wishlist'),
-          leading: IconButton(onPressed: (){
-            _backToHome();
-
-          },
-              icon: Icon(Icons.arrow_back_ios)),
-
-
-        ),
-        body: GridView.builder(
-          itemCount: 10,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 8,
-            crossAxisCount: 2,
+      onPopInvokedWithResult: (_, __) => _backToHome(),
+      child: ChangeNotifierProvider.value(
+        value: _wishListProvider,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Wishlist'),
+            leading: IconButton(
+              onPressed: _backToHome,
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
           ),
-          itemBuilder: (context, index) {
-          //  return const FittedBox(child: ProductCard());
-          },
+          body: Consumer<WishListProvider>(
+            builder: (context, wishListProvider, _) {
+              if (wishListProvider.isInitialLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      controller: _scrollController,
+                      itemCount: wishListProvider.productList.length,
+                      gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 4,
+                      ),
+                      itemBuilder: (context, index) {
+                        return FittedBox(
+                          child: Stack(
+                            children: [
+                              ProductCard(
+                                productModel: wishListProvider
+                                    .productList[index]
+                                    .productModel,
+                              ),
+                              Positioned(
+                                right: 10,
+                                top: 10,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _onTapRemoveItem(
+                                      wishListProvider.productList[index].cartId,
+                                    );
+                                  },
+                                  child: CircleAvatar(
+                                    child: Icon(Icons.close_outlined),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  if (wishListProvider.isLoadingMore)
+                    const LinearProgressIndicator(),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
+  void _onTapRemoveItem(String itemId) {}
 
-  void _backToHome(){
+  void _backToHome() {
     context.read<MainNavProvider>().backToHome();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }

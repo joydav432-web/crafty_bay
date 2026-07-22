@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/assets_images.dart';
-import '../../../products/data/model/product_model.dart';
+import '../../data/model/product_model.dart';
 import '../../../products/presentation/screen/product_details_screnn.dart';
 
 class ProductCard extends StatelessWidget {
