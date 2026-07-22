@@ -17,7 +17,7 @@ class ProductDetailsProvider extends ChangeNotifier {
     _getProductDetailsInProgress = true;
     notifyListeners();
 
-    final NetworkResponse response = await networkCaller.getRequest(
+    final NetworkResponse response = await networkCaller().getRequest(
       Urls.productDetailsUrl(productId),
     );
 

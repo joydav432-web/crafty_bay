@@ -1,0 +1,4 @@
+- [ ] Fix AuthController token saving bug
+- [ ] Add error display in ProductListByCategory
+- [ ] Add error display in CategoryScreen
+- [ ] (Optional) Improve error handling in Providers

@@ -15,6 +15,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 class CraftyBar extends StatefulWidget {
   const CraftyBar({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   State<CraftyBar> createState() => _CraftyBarState();
 }
@@ -41,7 +43,7 @@ class _CraftyBarState extends State<CraftyBar> {
       providers: [
         ChangeNotifierProvider.value(value: _themeModeProvider),
         ChangeNotifierProvider.value(value: _localeModeProvider),
-        ChangeNotifierProvider(create: (_)=>MainNavProvider())
+        ChangeNotifierProvider(create: (_)=>MainNavProvider()),
       ],
       child: Consumer<LocaleModeProvider>(builder:
           (context,localModeProvider,_){
@@ -50,6 +52,7 @@ class _CraftyBarState extends State<CraftyBar> {
             builder: (context,themeModeProvider,_){
 
             return MaterialApp(
+              navigatorKey: CraftyBar.navigatorKey,
             debugShowCheckedModeBanner:false,
 
             initialRoute: SplashScreen.name,

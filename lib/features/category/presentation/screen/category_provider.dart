@@ -39,7 +39,7 @@ class CategoryListProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    final NetworkResponse response = await networkCaller.getRequest(
+    final NetworkResponse response = await networkCaller().getRequest(
       Urls.categoryListUrl(_currentPage, categoryPerPage),
     );
 

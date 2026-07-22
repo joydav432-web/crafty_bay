@@ -20,7 +20,7 @@ class HomeSliderProviders extends ChangeNotifier {
     _sliderInProgress = true;
     notifyListeners();
 
-    final NetworkResponse response = await networkCaller.getRequest(
+    final NetworkResponse response = await networkCaller().getRequest(
       Urls.homeSliderUrl,
     );
 

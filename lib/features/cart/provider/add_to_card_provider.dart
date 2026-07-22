@@ -1,30 +1,30 @@
-import 'package:crafty_bay/core/service/network_caller/network_caller.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../../app/get_networkcaller.dart';
 import '../../../../app/urls.dart';
-import '../../data/models/otp_params.dart';
+import '../../../../core/service/network_caller/network_caller.dart';
+import '../../../app/get_networkcaller.dart';
+import '../data/model/add_to_cart_pharms.dart';
 
-
-class VerifyOtpProvider extends ChangeNotifier {
-  bool _verifyProgress  = false;
-
-  bool get verifyProgress => _verifyProgress;
+class AddToCartProvider extends ChangeNotifier {
+  bool _isLoading = false;
 
   String? _errorMessage;
 
+  bool get isLoading => _isLoading;
+
   String? get errorMessage => _errorMessage;
 
-  Future<bool> verifyOtp(VerifyOtpParams params) async {
+  Future<bool> addToCart(AddToCartParams params) async {
     bool isSuccess = false;
 
-    _verifyProgress = true;
+    _isLoading = true;
     notifyListeners();
 
     final NetworkResponse response = await networkCaller().postRequest(
-      Urls.verifyOtpUrl,
+      Urls.addToCartUrl,
       body: params.toJson(),
     );
+
     if (response.isSuccess) {
       isSuccess = true;
       _errorMessage = null;
@@ -32,11 +32,9 @@ class VerifyOtpProvider extends ChangeNotifier {
       _errorMessage = response.errorMessage;
     }
 
-    _verifyProgress = false;
+    _isLoading = false;
     notifyListeners();
 
     return isSuccess;
   }
-
-  netWorkCaller() {}
 }

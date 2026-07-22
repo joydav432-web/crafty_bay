@@ -40,7 +40,7 @@ class ProductListProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    final NetworkResponse response = await networkCaller.getRequest(
+    final NetworkResponse response = await networkCaller().getRequest(
       Urls.productListUrl(_currentPage,productPerPage)
     );
 

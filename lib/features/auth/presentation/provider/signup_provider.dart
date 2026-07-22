@@ -21,7 +21,7 @@ class SignUpProvider extends ChangeNotifier {
     _signUpInInProgress = true;
     notifyListeners();
 
-    final NetworkResponse response = await networkCaller.postRequest(
+    final NetworkResponse response = await networkCaller().postRequest(
       Urls.signUpUrl,
       body: params.toJson(),
     );

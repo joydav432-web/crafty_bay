@@ -1,14 +1,20 @@
 
+import 'package:crafty_bay/features/cart/provider/add_to_card_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/constant.dart';
 
 
 class TotalPrizeAddToCartSection extends StatelessWidget {
-  const TotalPrizeAddToCartSection({
-    super.key,
+   TotalPrizeAddToCartSection({
+    super.key, this.onTapAddToCart,
   });
+
+  final  VoidCallback? onTapAddToCart;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +59,16 @@ class TotalPrizeAddToCartSection extends StatelessWidget {
 
           SizedBox(
             width: 140,
-            child: FilledButton(onPressed: (){},
-                child: Text("Add to cart")),
+            child: Consumer<AddToCartProvider>(
+              builder: (context,addToCartProvider,_){
+
+                if (addToCartProvider.isLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return FilledButton(onPressed: onTapAddToCart,
+                    child: Text("Add to cart"));
+              }
+            ),
           )
         ],
       ),
