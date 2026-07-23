@@ -2,6 +2,7 @@ import 'package:crafty_bay/app/app_colors.dart';
 import 'package:crafty_bay/app/localization_extension.dart';
 import 'package:crafty_bay/features/auth/presentation/provider/otptimer_provider.dart';
 import 'package:crafty_bay/features/auth/presentation/provider/verify_otp_provider.dart';
+import 'package:crafty_bay/features/shered/presentation/presention/main_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
@@ -163,6 +164,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
       ),
     );
     if (isSuccess) {
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, MainNavBar.name, (predicate) => false);
+
+
 
 
     }else{
